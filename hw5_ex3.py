@@ -2,12 +2,13 @@ import sys
 
 def parse_log_line(line: str) -> dict:
     parts = line.split(' ', maxsplit=5) #розбиваємо рядок логу на частини за допомогою пробілу
-    if len(parts) == 6:
+    if len(parts) >= 4:
+        message = ' '.join(parts[3:])  #об'єднуємо всі частини, що становлять повідомлення
         return {             #Якщо розбито на правильну кількість частин, створюємо словник з інф про лог
             'date': parts[0],
             'time': parts[1],
             'level': parts[2],
-            'message': parts[5].strip() #останню частину вважаємо повідомленням, удаляємо зайві пробіли
+            'message': message.strip() # удаляємо зайві пробіли
         }
     else:
         print(f"Неправильний формат рядка логу: {line}") #виводимо повідомлення про помилку, якщо рядок не містить потрібної к-ті частнин
@@ -69,5 +70,5 @@ if __name__ == "__main__":   # перевіримо чи передано дос
         
         
       
-#python C:\Users\liljo\OneDrive\Documents\My_repos\First_repo\Homework\goit-hw-05\hw5_ex3.py C:\Users\liljo\OneDrive\Documents\My_repos\First_repo\Homework\goit-hw-05\log_file.log
-#python C:\Users\liljo\OneDrive\Documents\My_repos\First_repo\Homework\goit-hw-05\hw5_ex3.py C:\Users\liljo\OneDrive\Documents\My_repos\First_repo\Homework\goit-hw-05\log_file.log error
+#C:\Users\liljo\OneDrive\Documents\GitHub\-goit-algo-hw-05>python hw5_ex3.py C:\Users\liljo\OneDrive\Documents\GitHub\-goit-algo-hw-05\log_file.log (python hw5_ex3.py)
+#C:\Users\liljo\OneDrive\Documents\GitHub\-goit-algo-hw-05>python hw5_ex3.py C:\Users\liljo\OneDrive\Documents\GitHub\-goit-algo-hw-05\log_file.log error

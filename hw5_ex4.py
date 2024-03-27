@@ -39,6 +39,16 @@ def list_all_contacts(): # ф-ція для виведення всіх конт
     #створюємо рядок з усіма контактами (ім*я, номер)
     return "\n".join([f"{name}: {phone}" for name, phone in contacts.items()])
 
+def change_contact(args):  #ф-ція для зміни інформації про контакт
+    if len(args) < 2:
+        return "Please provide both name and new phone number."
+    name, new_phone = args
+    if name in contacts:
+        contacts[name] = new_phone
+        return "Contact information updated."
+    else:
+        return "Contact not found."
+
 def main(): # основна ф-ція програми
     while True: #запит команди від користувачв
         command = input("Enter a command: ").strip().split(maxsplit=1)
@@ -54,6 +64,8 @@ def main(): # основна ф-ція програми
             print(retrieve_contact(args))
         elif action == "all": #виклик ф-ції для виведення всіх контаків
             print(list_all_contacts())
+        elif action == "change":  
+            print(change_contact(args))  #обробка команди "change"
         elif action == "exit":
             break #вихід з програми
         else:
